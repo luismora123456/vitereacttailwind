@@ -1,5 +1,7 @@
+import Layout from '../../Components/Layout';
+
 function MyOrder() {
-  return <div className="bg-sky-500">My Order</div>;
+  return <Layout>MyOrder</Layout>;
 }
 
 export default MyOrder;
