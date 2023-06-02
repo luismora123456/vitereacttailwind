@@ -4,7 +4,6 @@ import Card from '../../Components/Card';
 import { apiUrl } from '../../api/';
 function Home() {
   const [items, setItems] = useState(null);
-
   useEffect(() => {
     fetch(`${apiUrl}products`)
       .then((response) => response.json())

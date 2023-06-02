@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { ShoppingCartContext } from '../../context';
 
 const Navbar = () => {
   let activeStyle = 'underline underline-offset-4';
+  const context = useContext(ShoppingCartContext);
   return (
     <nav className="flex justify-between items-center fixed z-10 w-full py-5 px-6 text-sm font-light top-0">
       <ul className="flex items-center gap-3">
@@ -71,9 +74,7 @@ const Navbar = () => {
           <NavLink
             to="/my-account"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            My Account
-          </NavLink>
+          ></NavLink>
         </li>
         <li>
           <NavLink
@@ -83,6 +84,7 @@ const Navbar = () => {
             Sign in
           </NavLink>
         </li>
+        <li>🛒{context.count}</li>
       </ul>
     </nav>
   );
