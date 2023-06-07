@@ -8,6 +8,17 @@ import { totalPrice } from '../../utils';
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
 
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: '01.02.23',
+      products: context.cartProducts,
+      totalProducts: context.cartProducts.lenght,
+      totalPrice: totalPrice(context.cartProducts),
+    };
+    context.setOrder([...context.order, orderToAdd]);
+    context.setCartProducts([]);
+    context.setCount(0);
+  };
   const handleDelete = (id) => {
     console.log(id);
     context.setCount(context.count - 1);
@@ -22,7 +33,7 @@ const CheckoutSideMenu = () => {
         context.isCheckoutSideMenuOpen ? 'flex' : 'hidden'
       } checkout-side-menu scrollable-cards flex-col fixed right-0 border border-black rounded-lg bg-white`}
     >
-      <div className="flex justify-between items-center p-6">
+      <div className="flex justify-between items-center p-6 ">
         <h2 className="font-medium text-xl">My Order</h2>
         <div>
           <XMarkIcon
@@ -31,7 +42,7 @@ const CheckoutSideMenu = () => {
           ></XMarkIcon>
         </div>
       </div>
-      <div className="px-6">
+      <div className="px-6 flex-1">
         {context.cartProducts.map((product) => (
           <OrderCard
             key={product.id}
@@ -43,13 +54,19 @@ const CheckoutSideMenu = () => {
           />
         ))}
       </div>
-      <div className="px-6">
-        <p className="flex justify-between items-center">
+      <div className="px-6 mb-6">
+        <p className="flex justify-between items-center mb-2">
           <span className="font-light">Total:</span>
           <span className="font-medium text-2xl">
             ${totalPrice(context.cartProducts)}
           </span>
         </p>
+        <button
+          className="bg-black py-3 w-full text-white rounded"
+          onClick={() => handleCheckout()}
+        >
+          Checkout
+        </button>
       </div>
     </aside>
   );
